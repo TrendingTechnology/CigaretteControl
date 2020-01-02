@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "850972521719",
+    "firebase_url": "https://cigarette-control.firebaseio.com",
+    "project_id": "cigarette-control",
+    "storage_bucket": "cigarette-control.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850972521719:android:2bf6323d48123e69280ff2",
+        "android_client_info": {
+          "package_name": "com.feragusper.cigarette_control"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "850972521719-cc93pllcbl05qhs5rupagems9uogrc3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMNSqcOcQRLspz0DeIa9CYCpS9l1yW_l0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "850972521719-cc93pllcbl05qhs5rupagems9uogrc3i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
