@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:cigarette_control/firebase_firestore_util.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math';
+
+import 'package:cigarette_control/firebase_firestore_util.dart';
+import 'package:flutter/material.dart';
 
 void main() => runApp(HomeScreen());
 
@@ -30,8 +30,7 @@ class DailySmokeCounterWidget extends StatefulWidget {
   _DailySmokeCounterWidgetState createState() => _DailySmokeCounterWidgetState();
 }
 
-class _DailySmokeCounterWidgetState extends State<DailySmokeCounterWidget>
-    with SingleTickerProviderStateMixin {
+class _DailySmokeCounterWidgetState extends State<DailySmokeCounterWidget> with SingleTickerProviderStateMixin {
   bool _loadingInProgress;
 
   Animation<double> _angleAnimation;
@@ -40,15 +39,16 @@ class _DailySmokeCounterWidgetState extends State<DailySmokeCounterWidget>
 
   int _counter = 0;
 
-  FirebaseFirestoreUtil firebaseFirestore;
+  FirebaseFirestoreUtil _firebaseFirestore = FirebaseFirestoreUtil();
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   @override
-  Future initState() async {
+  void initState() {
+    super.initState();
+
     _loadingInProgress = true;
 
-    _controller = new AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: this);
+    _controller = new AnimationController(duration: const Duration(milliseconds: 2000), vsync: this);
     _angleAnimation = new Tween(begin: 0.0, end: 360.0).animate(_controller)
       ..addListener(() {
         setState(() {
@@ -76,10 +76,10 @@ class _DailySmokeCounterWidgetState extends State<DailySmokeCounterWidget>
 
     _controller.forward();
 
-    firebaseFirestore = FirebaseFirestoreUtil();
-    firebaseFirestore.initState().then({
-        setState(() {
+    _firebaseFirestore.initState().then((counter) {
+      setState(() {
         _loadingInProgress = false;
+        _counter = counter;
       });
     });
   }
@@ -90,15 +90,10 @@ class _DailySmokeCounterWidgetState extends State<DailySmokeCounterWidget>
     super.dispose();
   }
 
-  _updateList(Event event) {
-    setState(() {
-      _counter = event.snapshot.value;
-    });
-  }
-
   void _incrementCounter() {
     setState(() {
-      firebaseFirestore.increment();
+      _counter++;
+      _firebaseFirestore.createCounter(_counter);
     });
   }
 
@@ -126,10 +121,7 @@ class _DailySmokeCounterWidgetState extends State<DailySmokeCounterWidget>
               ),
               Text(
                 '$_counter',
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .display1,
+                style: Theme.of(context).textTheme.display1,
               ),
             ],
           ),
@@ -150,16 +142,16 @@ class _DailySmokeCounterWidgetState extends State<DailySmokeCounterWidget>
       height: circleWidth * 2.0,
       child: new Column(
         children: <Widget>[
-          new Row (
+          new Row(
             children: <Widget>[
-              _buildCircle(circleWidth,Colors.blue),
-              _buildCircle(circleWidth,Colors.red),
+              _buildCircle(circleWidth, Colors.blue),
+              _buildCircle(circleWidth, Colors.red),
             ],
           ),
-          new Row (
+          new Row(
             children: <Widget>[
-              _buildCircle(circleWidth,Colors.yellow),
-              _buildCircle(circleWidth,Colors.green),
+              _buildCircle(circleWidth, Colors.yellow),
+              _buildCircle(circleWidth, Colors.green),
             ],
           ),
         ],

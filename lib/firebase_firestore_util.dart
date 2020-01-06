@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:unique_identifier/unique_identifier.dart';
+import 'package:intl/intl.dart';
 
 class FirebaseFirestoreUtil {
-  int _counter;
 
   static final FirebaseFirestoreUtil _instance = new FirebaseFirestoreUtil.internal();
 
-  Firestore _firestoreInstance;
+  Firestore _firestoreInstance = Firestore.instance;
 
   FirebaseFirestoreUtil.internal();
 
@@ -18,71 +18,24 @@ class FirebaseFirestoreUtil {
     return _instance;
   }
 
-  Future<int> initState() async {
+  initState() async {
     await initUniqueIdentifierState();
 
-    _firestoreInstance = Firestore.instance;
-    var smokeCounters = _firestoreInstance
-        .collection("smoke_counters")
-        .document(_uniqueDeviceIdentifier);
-
-    if (smokeCounters == null) {}
-
-    return smokeCounters;
-  }
-
-  Future<DailySmokeCounter> createDailySmokeCounter(
-      String title, String description) async {
-
-    var createTransaction = (Transaction tx) async {
-      final DocumentSnapshot ds = await tx
-          .get(_firestoreInstance.collection('smoke_counters').document(_uniqueDeviceIdentifier));
-
-      var dataMap = new Map<String, dynamic>();
-      dataMap['counter'] = 0;
-      dataMap['date'] = new DateTime.now();
-
-      await tx.set(ds.reference, dataMap);
-
-      return dataMap;
-    };
-
-    return Firestore.instance.runTransaction(createTransaction).then((mapData) {
-      return DailySmokeCounter.fromMap(mapData);
-    }).catchError((error) {
-      print('error: $error');
-      return null;
+    var counter = 0;
+    await _firestoreInstance.collection("users")
+        .document(_uniqueDeviceIdentifier)
+        .collection("smoke_counters").where("date", isGreaterThanOrEqualTo: DateTime.parse(new DateFormat('yyyyMMdd').format(new DateTime.now())))
+        .getDocuments().then((snapshot) {
+      snapshot.documents.forEach((document) async {
+        counter = counter + document.data['counter'];
+      });
     });
+
+    return counter;
   }
 
-  increment() async {
-    var smokeCounters = _firestoreInstance
-        .collection("smoke_counters")
-        .document(_uniqueDeviceIdentifier);
-
-    var createTransaction = (Transaction tx) async {
-      final DocumentSnapshot ds = await tx
-          .get(_firestoreInstance.collection('smoke_counters').document(_uniqueDeviceIdentifier));
-
-      var dataMap = new Map<String, dynamic>();
-      dataMap['counter'] = smokeCounters;
-      dataMap['date'] = new DateTime.now();
-
-      await tx.set(ds.reference, dataMap);
-
-      return dataMap;
-    };
-
-    return Firestore.instance.runTransaction(createTransaction).then((mapData) {
-      return DailySmokeCounter.fromMap(mapData);
-    }).catchError((error) {
-      print('error: $error');
-      return null;
-    });
-  }
-
-  int getCounter() {
-    return _counter;
+  createCounter(counter) async {
+    await _firestoreInstance.collection("users").document(_uniqueDeviceIdentifier).collection("smoke_counters").document().setData({'counter': 1, 'date': new DateTime.now()});
   }
 
   Future<void> initUniqueIdentifierState() async {
@@ -95,8 +48,4 @@ class FirebaseFirestoreUtil {
 
     _uniqueDeviceIdentifier = identifier;
   }
-}
-
-class DailySmokeCounter {
-  static Future<DailySmokeCounter> fromMap(Map<String, dynamic> mapData) {}
 }
