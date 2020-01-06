@@ -28,7 +28,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  firebase_database: ^3.0.4
   cloud_firestore: ^0.12.9+4
   unique_identifier: ^0.0.3
   intl: ^0.15.7
