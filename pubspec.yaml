@@ -31,6 +31,7 @@ dev_dependencies:
   cloud_firestore: ^0.12.9+4
   unique_identifier: ^0.0.3
   intl: ^0.15.7
+  circular_bottom_navigation: ^1.0.1
 
 
 # For information on the generic Dart part of this file, see the
