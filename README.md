@@ -8,7 +8,6 @@ Follow Us
 
 Screenshots
 -----------------
-![Grid](/etc/detail.png?raw=true)
 ![Detail](/etc/list.png?raw=true)
 ![Detail](/etc/stats.png?raw=true)
 
