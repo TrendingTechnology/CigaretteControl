@@ -2,6 +2,8 @@
 
 A Flutter application to control the cigarrette problem.
 
+![Detail](https://github.com/feragusper/CigaretteControl/workflows/Build/badge.svg)
+
 Follow Us
 -----------------
  - [Google Play] (https://play.google.com/store/apps/details?id=com.feragusper.cigarrette_control)
