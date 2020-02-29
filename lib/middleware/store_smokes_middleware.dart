@@ -9,7 +9,7 @@ List<Middleware<AppState>> createStoreSmokesMiddleware(
 ) {
   return [
     TypedMiddleware<AppState, InitAppAction>(
-      _firestoreSignIn(userRepository),
+      _firestoreSignIn(userRepository, smokesRepository),
     ),
     TypedMiddleware<AppState, ConnectToDataSourceAction>(
       _firestoreConnect(smokesRepository),
@@ -27,13 +27,13 @@ void Function(
   Store<AppState> store,
   InitAppAction action,
   NextDispatcher next,
-) _firestoreSignIn(
-  UserRepository repository,
+) _firestoreSignIn(UserRepository repository, ReactiveSmokesRepository smokesRepository,
 ) {
   return (store, action, next) {
     next(action);
 
-    repository.login().then((_) {
+    repository.login().then((userEntity) {
+      smokesRepository.setUserEntity(userEntity);
       store.dispatch(ConnectToDataSourceAction());
     });
   };

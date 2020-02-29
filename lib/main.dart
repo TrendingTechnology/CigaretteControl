@@ -17,13 +17,13 @@ import 'package:redux/redux.dart';
 void main() {
     WidgetsFlutterBinding.ensureInitialized();
 
-    runApp(ReduxApp());
+    runApp(CigaretteControlApp());
 }
 
-class ReduxApp extends StatelessWidget {
+class CigaretteControlApp extends StatelessWidget {
     final Store<AppState> store;
 
-    ReduxApp({
+    CigaretteControlApp({
         Key key,
         ReactiveSmokesRepository smokesRepository,
         UserRepository userRepository,

@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:core';
 
+import 'package:cigarette_control/smokes_repository_core/src/user_entity.dart';
+
 import 'smoke_entity.dart';
 
 /// A data layer class works with reactive data sources, such as Firebase. This
@@ -20,4 +22,6 @@ abstract class ReactiveSmokesRepository {
   Stream<List<SmokeEntity>> dailySmokes();
 
   Stream<List<SmokeEntity>> monthlySmokes();
+
+  void setUserEntity(UserEntity userEntity) {}
 }

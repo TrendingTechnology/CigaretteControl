@@ -5,27 +5,30 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 class FirestoreReactiveSmokesRepository implements ReactiveSmokesRepository {
-  static const String path = 'smoke';
+  static const String users_path = 'users';
+  static const String smokes_path = 'smokes';
 
   final Firestore firestore;
 
-  const FirestoreReactiveSmokesRepository(this.firestore);
+  UserEntity userEntity;
+
+  FirestoreReactiveSmokesRepository(this.firestore);
 
   @override
   Future<void> addNewSmoke(SmokeEntity smoke) {
-    return firestore.collection(path).document(smoke.id).setData(smoke.toJson());
+    return getCurrentUserSmokesCollection().document(smoke.id).setData(smoke.toJson());
   }
 
   @override
   Future<void> deleteSmoke(List<String> idList) async {
     await Future.wait<void>(idList.map((id) {
-      return firestore.collection(path).document(id).delete();
+      return getCurrentUserSmokesCollection().document(id).delete();
     }));
   }
 
   @override
   Stream<List<SmokeEntity>> dailySmokes() {
-    return firestore.collection(path).where("date", isGreaterThanOrEqualTo: DateTime.parse(new DateFormat('yyyyMMdd').format(new DateTime.now()))).snapshots().map((snapshot) {
+    return getCurrentUserSmokesCollection().where("date", isGreaterThanOrEqualTo: DateTime.parse(new DateFormat('yyyyMMdd').format(new DateTime.now()))).snapshots().map((snapshot) {
       return snapshot.documents.map((doc) {
         return SmokeEntity(
           doc.documentID,
@@ -37,7 +40,7 @@ class FirestoreReactiveSmokesRepository implements ReactiveSmokesRepository {
 
   @override
   Stream<List<SmokeEntity>> monthlySmokes() {
-    return firestore.collection(path).where("date", isGreaterThanOrEqualTo: DateTime.parse(new DateFormat('yyyyMM01').format(new DateTime.now()))).snapshots().map((snapshot) {
+    return getCurrentUserSmokesCollection().where("date", isGreaterThanOrEqualTo: DateTime.parse(new DateFormat('yyyyMM01').format(new DateTime.now()))).snapshots().map((snapshot) {
       return snapshot.documents.map((doc) {
         return SmokeEntity(
           doc.documentID,
@@ -45,5 +48,14 @@ class FirestoreReactiveSmokesRepository implements ReactiveSmokesRepository {
         );
       }).toList();
     });
+  }
+
+  @override
+  void setUserEntity(UserEntity userEntity) {
+    this.userEntity = userEntity;
+  }
+
+  CollectionReference getCurrentUserSmokesCollection() {
+    return firestore.collection(users_path).document(userEntity.id).collection(smokes_path);
   }
 }
