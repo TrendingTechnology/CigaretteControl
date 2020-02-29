@@ -37,8 +37,9 @@ Release
 -------
 In order to make an Android release build it's necessary to:
  - Create a signature in android/buildsystem/key.jks
- - Run flutter build apk --split-per-abi --no-shrink
  - Create a properties file in andrid/buildsystem/key.properties with the values storePassword, keyPassword, keyAlias, storeFile
+ - Change the version by modifying the version property in pubspec.yml (versionName+versionCode)
+ - Run flutter build apk --split-per-abi --no-shrink
 
 Architecture
 ------------
