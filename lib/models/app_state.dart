@@ -14,7 +14,7 @@ class AppState {
     this.dailySmokes = const [],
     this.monthlySmokes = const [],
     this.activeTab = AppTab.smokes,
-    this.activeFilter = VisibilityFilter.all,
+    this.activeFilter = VisibilityFilter.daily,
   });
 
   factory AppState.loading() => AppState(isLoading: true);

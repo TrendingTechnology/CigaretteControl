@@ -50,14 +50,6 @@ class _Button extends StatelessWidget {
       onSelected: onSelected,
       itemBuilder: (BuildContext context) => <PopupMenuItem<VisibilityFilter>>[
         PopupMenuItem<VisibilityFilter>(
-          key: ArchSampleKeys.allFilter,
-          value: VisibilityFilter.all,
-          child: Text(
-            ArchSampleLocalizations.of(context).showAll,
-            style: activeFilter == VisibilityFilter.all ? activeStyle : defaultStyle,
-          ),
-        ),
-        PopupMenuItem<VisibilityFilter>(
           key: ArchSampleKeys.dailyFilter,
           value: VisibilityFilter.daily,
           child: Text(
@@ -71,6 +63,16 @@ class _Button extends StatelessWidget {
           child: Text(
             ArchSampleLocalizations.of(context).showMonthly,
             style: activeFilter == VisibilityFilter.monthly ? activeStyle : defaultStyle,
+          ),
+        ),
+        PopupMenuItem<VisibilityFilter>(
+          key: ArchSampleKeys.allFilter,
+          value: VisibilityFilter.all,
+          child: Text(
+            ArchSampleLocalizations
+                .of(context)
+                .showAll,
+            style: activeFilter == VisibilityFilter.all ? activeStyle : defaultStyle,
           ),
         ),
       ],
