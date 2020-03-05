@@ -53,7 +53,7 @@ class DetailsScreen extends StatelessWidget {
                             bottom: 16.0,
                           ),
                           child: Text(
-                            "Cigarrette smoked at ${new DateFormat('HH:mm').format(smoke.date)} hs",
+                              "Cigarette smoked at ${new DateFormat('HH:mm').format(smoke.date)} hs",
                             key: ArchSampleKeys.detailsSmokeItemTask,
                             style: Theme.of(context).textTheme.headline,
                           ),
