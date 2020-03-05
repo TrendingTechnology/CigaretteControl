@@ -27,7 +27,8 @@ void Function(
   Store<AppState> store,
   InitAppAction action,
   NextDispatcher next,
-) _firestoreSignIn(UserRepository repository, ReactiveSmokesRepository smokesRepository,
+    ) _firestoreSignIn(UserRepository repository,
+    ReactiveSmokesRepository smokesRepository,
 ) {
   return (store, action, next) {
     next(action);

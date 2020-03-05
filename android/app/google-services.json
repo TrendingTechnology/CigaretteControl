@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "850972521719-q4tncfflsonjf2s5ktf7p3vtaos97e94.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.feragusper.cigarette_control",
+            "certificate_hash": "156029d91e482de69f1f078ce1307132bed0eee9"
+          }
+        },
+        {
           "client_id": "850972521719-cc93pllcbl05qhs5rupagems9uogrc3i.apps.googleusercontent.com",
           "client_type": 3
         }

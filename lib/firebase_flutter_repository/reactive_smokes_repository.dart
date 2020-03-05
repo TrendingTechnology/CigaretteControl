@@ -28,13 +28,11 @@ class FirestoreReactiveSmokesRepository implements ReactiveSmokesRepository {
 
   @override
   Stream<List<SmokeEntity>> dailySmokes() {
-      return getCurrentUserSmokesCollection()
-          .where(
-          "date",
-          isGreaterThanOrEqualTo: DateTime.parse(new DateFormat('yyyyMMdd').format(new DateTime.now())))
-          .orderBy("date", descending: true)
-          .snapshots()
-          .map((snapshot) {
+    return getCurrentUserSmokesCollection()
+        .where("date", isGreaterThanOrEqualTo: DateTime.parse(new DateFormat('yyyyMMdd').format(new DateTime.now())))
+        .orderBy("date", descending: true)
+        .snapshots()
+        .map((snapshot) {
       return snapshot.documents.map((doc) {
         return SmokeEntity(
           doc.documentID,
@@ -46,12 +44,11 @@ class FirestoreReactiveSmokesRepository implements ReactiveSmokesRepository {
 
   @override
   Stream<List<SmokeEntity>> monthlySmokes() {
-      return getCurrentUserSmokesCollection()
-          .where("date",
-          isGreaterThanOrEqualTo: DateTime.parse(new DateFormat('yyyyMM01').format(new DateTime.now())))
-          .orderBy("date", descending: true)
-          .snapshots()
-          .map((snapshot) {
+    return getCurrentUserSmokesCollection()
+        .where("date", isGreaterThanOrEqualTo: DateTime.parse(new DateFormat('yyyyMM01').format(new DateTime.now())))
+        .orderBy("date", descending: true)
+        .snapshots()
+        .map((snapshot) {
       return snapshot.documents.map((doc) {
         return SmokeEntity(
           doc.documentID,
