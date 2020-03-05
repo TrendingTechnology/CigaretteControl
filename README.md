@@ -1,12 +1,12 @@
 # Cigarette Control
 
-A Flutter application to control the cigarrette problem.
+A Flutter application to control the cigarette problem.
 
 ![Detail](https://github.com/feragusper/CigaretteControl/workflows/Build/badge.svg)
 
 Follow Us
 -----------------
- - [Google Play] (https://play.google.com/store/apps/details?id=com.feragusper.cigarrette_control)
+ - [Google Play] (https://play.google.com/store/apps/details?id=com.feragusper.cigarette_control)
 
 Screenshots
 -----------------

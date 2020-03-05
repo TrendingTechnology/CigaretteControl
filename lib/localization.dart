@@ -10,7 +10,7 @@ class FirestoreReduxLocalizations {
     );
   }
 
-  String get appTitle => 'Cigarrette Control';
+  String get appTitle => 'Cigarette Control';
 }
 
 class FirestoreReduxLocalizationsDelegate extends LocalizationsDelegate<FirestoreReduxLocalizations> {
