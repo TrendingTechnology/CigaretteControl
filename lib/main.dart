@@ -32,8 +32,7 @@ class CigaretteControlApp extends StatelessWidget {
         appReducer,
         initialState: AppState.loading(),
         middleware: createStoreSmokesMiddleware(
-            smokesRepository ??
-                FirestoreReactiveSmokesRepository(Firestore.instance),
+            smokesRepository ?? FirestoreReactiveSmokesRepository(Firestore.instance),
             userRepository ?? FirebaseUserRepository(FirebaseAuth.instance),
         ),
     ),
@@ -55,9 +54,7 @@ class CigaretteControlApp extends StatelessWidget {
                     ArchSampleLocalizationsDelegate(),
                     FirestoreReduxLocalizationsDelegate(),
                 ],
-                routes: {
-                    ArchRoutes.home: (context) => HomeScreen()
-                },
+                routes: {ArchRoutes.home: (context) => HomeScreen()},
             ),
         );
     }

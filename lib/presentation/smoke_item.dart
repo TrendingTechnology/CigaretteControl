@@ -34,7 +34,7 @@ class SmokeItem extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          "${new DateFormat('HH:mm').format(smoke.date)} hs",
+          "${new DateFormat('MM/dd').format(smoke.date)}",
           key: ArchSampleKeys.smokeItemNote(smoke.id),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,

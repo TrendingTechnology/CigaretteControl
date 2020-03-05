@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cigarette_control/smokes_repository_core/smoke_repository_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseUserRepository implements UserRepository {
   final FirebaseAuth auth;
@@ -10,12 +11,20 @@ class FirebaseUserRepository implements UserRepository {
 
   @override
   Future<UserEntity> login() async {
-    final firebaseUser = await auth.signInAnonymously();
+    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    final FirebaseUser user = (await auth.signInWithCredential(credential)).user;
 
     return UserEntity(
-      id: firebaseUser.user.uid,
-      displayName: firebaseUser.user.displayName,
-      photoUrl: firebaseUser.user.photoUrl,
+      id: user.uid,
+      displayName: user.displayName,
+      photoUrl: user.photoUrl,
     );
   }
 }
