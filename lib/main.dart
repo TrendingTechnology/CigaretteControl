@@ -15,47 +15,48 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 void main() {
-    WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
-    runApp(CigaretteControlApp());
+  runApp(CigaretteControlApp());
 }
 
 class CigaretteControlApp extends StatelessWidget {
-    final Store<AppState> store;
+  final Store<AppState> store;
 
-    CigaretteControlApp({
-        Key key,
-        ReactiveSmokesRepository smokesRepository,
-        UserRepository userRepository,
-    })
-        : store = Store<AppState>(
-        appReducer,
-        initialState: AppState.loading(),
-        middleware: createStoreSmokesMiddleware(
+  CigaretteControlApp({
+    Key key,
+    ReactiveSmokesRepository smokesRepository,
+    UserRepository userRepository,
+  })
+      : store = Store<AppState>(
+    appReducer,
+    initialState: AppState.loading(),
+    middleware: createStoreSmokesMiddleware(
             smokesRepository ?? FirestoreReactiveSmokesRepository(Firestore.instance),
             userRepository ?? FirebaseUserRepository(FirebaseAuth.instance),
-        ),
     ),
-            super(key: key) {
-        store.dispatch(InitAppAction());
-    }
+  ),
+        super(key: key) {
+    store.dispatch(InitAppAction());
+  }
 
-    @override
-    Widget build(BuildContext context) {
-        return StoreProvider(
-            store: store,
-            child: MaterialApp(
-                onGenerateTitle: (context) =>
-                FirestoreReduxLocalizations
-                    .of(context)
-                    .appTitle,
-                theme: ArchSampleTheme.theme,
-                localizationsDelegates: [
-                    ArchSampleLocalizationsDelegate(),
-                    FirestoreReduxLocalizationsDelegate(),
-                ],
-                routes: {ArchRoutes.home: (context) => HomeScreen()},
-            ),
-        );
-    }
+
+  @override
+  Widget build(BuildContext context) {
+    return StoreProvider(
+      store: store,
+      child: MaterialApp(
+        onGenerateTitle: (context) =>
+        FirestoreReduxLocalizations
+            .of(context)
+            .appTitle,
+        theme: ArchSampleTheme.theme,
+        localizationsDelegates: [
+          ArchSampleLocalizationsDelegate(),
+          FirestoreReduxLocalizationsDelegate(),
+        ],
+        routes: {ArchRoutes.home: (context) => HomeScreen()},
+      ),
+    );
+  }
 }
