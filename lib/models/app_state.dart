@@ -1,4 +1,5 @@
 import 'package:cigarette_control/models/models.dart';
+import 'package:cigarette_control/models/user.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -6,6 +7,7 @@ class AppState {
   final bool isLoading;
   final List<Smoke> dailySmokes;
   final List<Smoke> monthlySmokes;
+  final User user;
   final AppTab activeTab;
   final VisibilityFilter activeFilter;
 
@@ -13,6 +15,8 @@ class AppState {
     this.isLoading = false,
     this.dailySmokes = const [],
     this.monthlySmokes = const [],
+    // ignore: avoid_init_to_null
+    this.user = null,
     this.activeTab = AppTab.smokes,
     this.activeFilter = VisibilityFilter.daily,
   });

@@ -19,6 +19,7 @@ class ArchSampleKeys {
   static const tabs = Key('__tabs__');
   static const smokeTab = Key('__smokeTab__');
   static const statsTab = Key('__statsTab__');
+  static const accountTab = Key('__profileTab__');
 
   // Filters
   static const filterButton = Key('__filterButton__');
