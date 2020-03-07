@@ -1,8 +1,6 @@
 import 'package:cigarette_control/actions/actions.dart';
 import 'package:cigarette_control/containers/active_tab.dart';
 import 'package:cigarette_control/containers/filter_selector.dart';
-import 'package:cigarette_control/containers/filtered_smokes.dart';
-import 'package:cigarette_control/containers/stats.dart';
 import 'package:cigarette_control/containers/tab_selector.dart';
 import 'package:cigarette_control/localization.dart';
 import 'package:cigarette_control/models/models.dart';
@@ -26,7 +24,7 @@ class HomeScreen extends StatelessWidget {
               FilterSelector(visible: activeTab == AppTab.smokes),
             ],
           ),
-          body: activeTab == AppTab.smokes ? FilteredSmokes() : Stats(),
+          body: activeTab.contentWidget,
           floatingActionButton: FloatingActionButton(
             key: ArchSampleKeys.addSmokeFab,
             onPressed: () {

@@ -34,6 +34,14 @@ class ArchSampleLocalizations {
         locale: locale.toString(),
       );
 
+  String get account =>
+      Intl.message(
+          'Account',
+          name: 'account',
+          args: [],
+          locale: locale.toString(),
+      );
+
   String get showAll => Intl.message(
         'Show All',
         name: 'showAll',
@@ -109,6 +117,22 @@ class ArchSampleLocalizations {
         name: 'daily',
         args: [],
         locale: locale.toString(),
+      );
+
+  String get name =>
+      Intl.message(
+          'Name',
+          name: 'name',
+          args: [],
+          locale: locale.toString(),
+      );
+
+  String get email =>
+      Intl.message(
+          'Email',
+          name: 'email',
+          args: [],
+          locale: locale.toString(),
       );
 
   String smokeDeleted(String task) => Intl.message(

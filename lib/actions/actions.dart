@@ -1,4 +1,5 @@
 import 'package:cigarette_control/models/models.dart';
+import 'package:cigarette_control/models/user.dart';
 import 'package:cigarette_control/models/visibility_filter.dart';
 
 class LoadDailySmokesAction {
@@ -53,10 +54,14 @@ class InitAppAction {
 }
 
 class ConnectToDataSourceAction {
-  @override
-  String toString() {
-    return 'ConnectToDataSourceAction{}';
-  }
+    final User user;
+
+    ConnectToDataSourceAction(this.user);
+
+    @override
+    String toString() {
+        return 'ConnectToDataSourceAction{}';
+    }
 }
 
 class UpdateFilterAction {
@@ -79,4 +84,11 @@ class UpdateTabAction {
   String toString() {
     return 'UpdateTabAction{newTab: $newTab}';
   }
+}
+
+class LogoutAction {
+    @override
+    String toString() {
+        return 'LogoutAction{}';
+    }
 }

@@ -21,10 +21,12 @@ class FirebaseUserRepository implements UserRepository {
 
     final FirebaseUser user = (await auth.signInWithCredential(credential)).user;
 
-    return UserEntity(
-      id: user.uid,
-      displayName: user.displayName,
-      photoUrl: user.photoUrl,
-    );
+    return UserEntity(user.uid, user.displayName, user.photoUrl, user.email);
+  }
+
+  @override
+  Future<void> logout() async {
+    await GoogleSignIn().signOut();
+    await auth.signOut();
   }
 }

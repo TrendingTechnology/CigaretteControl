@@ -23,10 +23,10 @@ class TabSelector extends StatelessWidget {
           items: AppTab.values.map((tab) {
             return BottomNavigationBarItem(
               icon: Icon(
-                tab == AppTab.smokes ? Icons.list : Icons.show_chart,
-                key: tab == AppTab.smokes ? ArchSampleKeys.smokeTab : ArchSampleKeys.statsTab,
+                tab.icon,
+                key: tab.key,
               ),
-              title: Text(tab == AppTab.stats ? ArchSampleLocalizations.of(context).stats : ArchSampleLocalizations.of(context).smokes),
+              title: Text(tab.makeTitle(context)),
             );
           }).toList(),
         );

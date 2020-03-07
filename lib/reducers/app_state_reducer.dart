@@ -10,6 +10,7 @@ AppState appReducer(AppState state, action) {
     isLoading: loadingReducer(state.isLoading, action),
     dailySmokes: dailySmokesReducer(state.dailySmokes, action),
     monthlySmokes: monthlySmokesReducer(state.monthlySmokes, action),
+      user: userReducer(state.user, action),
     activeFilter: visibilityReducer(state.activeFilter, action),
     activeTab: tabsReducer(state.activeTab, action),
   );
